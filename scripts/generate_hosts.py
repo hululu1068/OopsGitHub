@@ -95,7 +95,7 @@ class CurlResult:
 @dataclass(frozen=True)
 class SelectedHost:
     domain: str
-    ip: str | None
+    ips: list[str]
     candidates: list[str]
     curl_results: list[CurlResult]
 
@@ -208,7 +208,7 @@ def pick_best(domain: str, candidates: list[str]) -> SelectedHost:
 
     successful = [result for result in results if result.ok]
     if not successful:
-        return SelectedHost(domain, None, candidates, results)
+        return SelectedHost(domain, [], candidates, results)
 
     def score(ip: str) -> tuple[float, float, str]:
         ip_results = [result for result in successful if result.ip == ip]
@@ -220,8 +220,8 @@ def pick_best(domain: str, candidates: list[str]) -> SelectedHost:
             ip,
         )
 
-    best_ip = min({result.ip for result in successful}, key=score)
-    return SelectedHost(domain, best_ip, candidates, results)
+    best_ips = sorted({result.ip for result in successful}, key=score)[:2]
+    return SelectedHost(domain, best_ips, candidates, results)
 
 
 def generate() -> tuple[str, list[SelectedHost]]:
@@ -232,17 +232,17 @@ def generate() -> tuple[str, list[SelectedHost]]:
             candidates = query_a_records(domain)
         except Exception as exc:
             print(f"  DNS failed: {exc}")
-            selected_hosts.append(SelectedHost(domain, None, [], []))
+            selected_hosts.append(SelectedHost(domain, [], [], []))
             continue
 
         if not candidates:
             print("  no A record")
-            selected_hosts.append(SelectedHost(domain, None, [], []))
+            selected_hosts.append(SelectedHost(domain, [], [], []))
             continue
 
         selected = pick_best(domain, candidates)
-        if selected.ip:
-            print(f"  selected {selected.ip} from {', '.join(candidates)}")
+        if selected.ips:
+            print(f"  selected {', '.join(selected.ips)} from {', '.join(candidates)}")
         else:
             print(f"  no reachable candidate from {', '.join(candidates)}")
         selected_hosts.append(selected)
@@ -251,16 +251,17 @@ def generate() -> tuple[str, list[SelectedHost]]:
     lines = [
         "# OopsGitHub Host Start",
         f"# Update time: {update_time}",
-        f"# DoH: {DOH_ENDPOINT}",
-        f"# EDNS Client Subnet: {EDNS_CLIENT_SUBNET}/{EDNS_PREFIX}",
-        "# Candidate IPs: queried by DoH with EDNS Client Subnet",
-        "# Curl test: HTTPS 443 with browser User-Agent and random Client-IP from 115.196.43.0/24",
+        "# Project: https://github.com/hululu1068/OopsGitHub",
+        "# Update url: https://github.com/hululu1068/OopsGitHub/raw/main/hosts",
+        "",
     ]
     for selected in selected_hosts:
-        if selected.ip:
-            lines.append(f"{selected.ip.ljust(30)}{selected.domain}")
+        if selected.ips:
+            for ip in selected.ips:
+                lines.append(f"{ip.ljust(30)}{selected.domain}")
         else:
             lines.append(f"# IP Address Not Found         {selected.domain}")
+    lines.append("")
     lines.append("# OopsGitHub Host End")
     return "\n".join(lines) + "\n", selected_hosts
 
@@ -281,7 +282,7 @@ def write_report(selected_hosts: list[SelectedHost]) -> None:
     for selected in selected_hosts:
         report.append({
             "domain": selected.domain,
-            "selected_ip": selected.ip,
+            "selected_ips": selected.ips,
             "candidates": selected.candidates,
             "curl_results": [
                 {

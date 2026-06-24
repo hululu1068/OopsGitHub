@@ -9,7 +9,7 @@ OopsGitHub 自动生成 GitHub 系列域名的 hosts 文件，目标是直接产
 - DNS 查询携带 EDNS Client Subnet：`101.110.0.0/18`，查询结果作为 GitHub 域名的候选 IP。
 - 候选 IP 使用 `curl` 访问 `https://域名/` 的 443 端口测试。
 - `curl` 测试时使用浏览器 User-Agent，并添加随机 `Client-IP`：`115.196.43.0/24`。
-- 每个域名从可用候选 IP 中选择响应时间最优的 IP。
+- 每个域名从可用候选 IP 中保留最多两个响应时间最优的 IP。
 
 ## 使用
 
