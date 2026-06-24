@@ -83,6 +83,7 @@ GITHUB_DOMAINS = [
     "codeload.github.com",
     "gist.github.com",
     "desktop.githubusercontent.com",
+    "release-assets.githubusercontent.com",
     "pipelines.actions.githubusercontent.com",
     "blob.core.windows.net",
     "github-cloud.s3.amazonaws.com",
