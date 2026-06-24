@@ -10,6 +10,7 @@ OopsGitHub 自动生成 GitHub 系列域名的 hosts 文件，目标是直接产
 - 候选 IP 使用 `curl` 访问 `https://域名/` 的 443 端口测试。
 - `curl` 测试时使用浏览器 User-Agent，并添加随机 `Client-IP`：`115.196.43.0/24`。
 - 每个域名从可用候选 IP 中保留最多两个响应时间最优的 IP。
+- 同步生成 `hosts`、`smartdns.conf`、`surge.conf` 三种格式。
 
 ## 使用
 
@@ -20,6 +21,11 @@ OopsGitHub 自动生成 GitHub 系列域名的 hosts 文件，目标是直接产
 ```
 
 最后更新时间：`{update_time}`
+
+其他格式：
+
+- SmartDNS：`https://github.com/hululu1068/OopsGitHub/raw/main/smartdns.conf`
+- Surge：`https://github.com/hululu1068/OopsGitHub/raw/main/surge.conf`
 
 hosts 文件位置：
 

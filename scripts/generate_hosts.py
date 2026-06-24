@@ -37,7 +37,6 @@ GITHUB_DOMAINS = [
     "alive.github.com",
     "api.github.com",
     "api.individual.githubcopilot.com",
-    "assets-cdn.github.com",
     "avatars.githubusercontent.com",
     "avatars0.githubusercontent.com",
     "avatars1.githubusercontent.com",
@@ -266,8 +265,24 @@ def generate() -> tuple[str, list[SelectedHost]]:
     return "\n".join(lines) + "\n", selected_hosts
 
 
+def format_smartdns(selected_hosts: list[SelectedHost]) -> str:
+    lines = []
+    for selected in selected_hosts:
+        for ip in selected.ips:
+            lines.append(f"address /{selected.domain}/{ip}")
+    return "\n".join(lines) + "\n"
+
+
+def format_surge(selected_hosts: list[SelectedHost]) -> str:
+    lines = []
+    for selected in selected_hosts:
+        for ip in selected.ips:
+            lines.append(f"{selected.domain} = {ip}")
+    return "\n".join(lines) + "\n"
+
+
 def write_readme(hosts_content: str) -> None:
-    template_path = ROOT / "README_TEMPLATE.md"
+    template_path = ROOT / "scripts" / "README_TEMPLATE.md"
     if not template_path.exists():
         return
     update_time = datetime.now(timezone.utc).astimezone().replace(microsecond=0).isoformat()
@@ -308,6 +323,8 @@ def write_report(selected_hosts: list[SelectedHost]) -> None:
 def main() -> None:
     hosts_content, selected_hosts = generate()
     (ROOT / "hosts").write_text(hosts_content, encoding="utf-8")
+    (ROOT / "smartdns.conf").write_text(format_smartdns(selected_hosts), encoding="utf-8")
+    (ROOT / "surge.conf").write_text(format_surge(selected_hosts), encoding="utf-8")
     write_readme(hosts_content)
     write_report(selected_hosts)
 
