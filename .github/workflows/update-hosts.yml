@@ -9,6 +9,7 @@ on:
     - cron: "0 */6 * * *"
 
 permissions:
+  actions: write
   contents: write
 
 jobs:
@@ -41,3 +42,11 @@ jobs:
             git commit -m "update hosts"
             git push
           fi
+
+      - name: Delete Workflow Runs
+        uses: Mattraks/delete-workflow-runs@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          retain_days: 1
+          keep_minimum_runs: 1
