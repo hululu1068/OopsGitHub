@@ -38,9 +38,41 @@ CURL_MAX_TIME_SECONDS = 8
 CURL_ATTEMPTS = 2
 
 GITHUB_DOMAINS = [
-    "alive.github.com",
+    "github.com",
+    "github.community",
+    "github.blog",
+    "github.dev",
+    "github.io",
+    "githubstatus.com",
+    "githubassets.com",
+    "githubusercontent.com",
+    "githubapp.com",
+    "githubnext.com",
+    "githubpreview.dev",
+    "githubhackathon.com",
+    "githubuniverse.com",
+    "education.github.com",
+    "myoctocat.com",
+    "opensource.guide",
+    "repo.new",
+    "thegithubshop.com",
     "api.github.com",
-    "api.individual.githubcopilot.com",
+    "alive.github.com",
+    "live.github.com",
+    "central.github.com",
+    "collector.github.com",
+    "github.githubassets.com",
+    "assets-cdn.github.com",
+    "github.global.ssl.fastly.net",
+    "github.map.fastly.net",
+    "favicons.githubusercontent.com",
+    "raw.githubusercontent.com",
+    "media.githubusercontent.com",
+    "objects.githubusercontent.com",
+    "cloud.githubusercontent.com",
+    "camo.githubusercontent.com",
+    "user-images.githubusercontent.com",
+    "private-user-images.githubusercontent.com",
     "avatars.githubusercontent.com",
     "avatars0.githubusercontent.com",
     "avatars1.githubusercontent.com",
@@ -48,37 +80,30 @@ GITHUB_DOMAINS = [
     "avatars3.githubusercontent.com",
     "avatars4.githubusercontent.com",
     "avatars5.githubusercontent.com",
-    "camo.githubusercontent.com",
-    "central.github.com",
-    "cloud.githubusercontent.com",
     "codeload.github.com",
-    "collector.github.com",
-    "desktop.githubusercontent.com",
-    "education.github.com",
-    "favicons.githubusercontent.com",
     "gist.github.com",
+    "desktop.githubusercontent.com",
+    "pipelines.actions.githubusercontent.com",
+    "blob.core.windows.net",
     "github-cloud.s3.amazonaws.com",
     "github-com.s3.amazonaws.com",
     "github-production-release-asset-2e65be.s3.amazonaws.com",
     "github-production-repository-file-5c1aeb.s3.amazonaws.com",
     "github-production-user-asset-6210df.s3.amazonaws.com",
-    "github.blog",
-    "github.com",
-    "github.community",
-    "github.dev",
-    "github.githubassets.com",
-    "github.global.ssl.fastly.net",
-    "github.io",
-    "github.map.fastly.net",
-    "githubstatus.com",
-    "live.github.com",
-    "media.githubusercontent.com",
-    "objects.githubusercontent.com",
-    "pipelines.actions.githubusercontent.com",
-    "private-user-images.githubusercontent.com",
-    "raw.githubusercontent.com",
-    "user-images.githubusercontent.com",
+    "githubcopilot.com",
+    "api.individual.githubcopilot.com",
+    "ghcr.io",
+    "atom.io",
+    "dependabot.com",
+    "git.io",
+    "npmjs.com",
+    "npmjs.org",
+    "npm.community",
+    "github-avatars.oss-cn-hongkong.aliyuncs.com",
+    "github-atom-io-herokuapp-com.freetls.fastly.net",
     "vscode.dev",
+    "rawgit.com",
+    "rawgithub.com",
 ]
 
 
@@ -227,7 +252,7 @@ def pick_best(domain: str, candidates: list[str]) -> SelectedHost:
     return SelectedHost(domain, best_ips, candidates, results)
 
 
-def generate() -> tuple[str, list[SelectedHost]]:
+def generate() -> tuple[str, list[SelectedHost], str]:
     selected_hosts: list[SelectedHost] = []
     for index, domain in enumerate(GITHUB_DOMAINS, start=1):
         print(f"[{index}/{len(GITHUB_DOMAINS)}] resolve {domain}")
@@ -278,8 +303,8 @@ def format_smartdns(selected_hosts: list[SelectedHost], update_time: str) -> str
         "",
     ]
     for selected in selected_hosts:
-        for ip in selected.ips:
-            lines.append(f"address /{selected.domain}/{ip}")
+        if selected.ips:
+            lines.append(f"address /{selected.domain}/{','.join(selected.ips)}")
     return "\n".join(lines) + "\n"
 
 
