@@ -1,16 +1,11 @@
 # OopsGitHub
 
-OopsGitHub 自动生成 GitHub 系列域名的 hosts 文件，目标是直接产出可用结果。
-
-## 规则
+OopsGitHub 让 GitHub 访问更流畅!
 
 - 每 6 小时通过 GitHub Actions 更新一次。
-- DNS 查询使用 DoH：`https://public.dns.iij.jp/dns-query`。
-- DNS 查询携带 EDNS Client Subnet：`101.110.0.0/18`，查询结果作为 GitHub 域名的候选 IP。
-- 候选 IP 使用 `curl` 访问 `https://域名/` 的 443 端口测试。
-- `curl` 测试时使用浏览器 User-Agent，并添加随机 `Client-IP`：`115.196.43.0/24`。
-- 每个域名从可用候选 IP 中保留最多两个响应时间最优的 IP。
-- 同步生成 `hosts`、`smartdns.conf`、`surge.conf` 三种格式。
+- 模拟真实的客户端请求。
+- 每个域名保留最多两个响应时间最优的 IP。
+- 同步支持 `hosts`、`smartdns.conf`、`surge.conf` 格式。可配置 `Surge` `Loon` `Mihomo` `Shadowrocket` `Quantumult X`使用。
 
 ## 使用
 

@@ -18,6 +18,10 @@ import dns.rdatatype
 
 
 ROOT = Path(__file__).resolve().parents[1]
+PROJECT_URL = "https://github.com/hululu1068/OopsGitHub"
+HOSTS_UPDATE_URL = f"{PROJECT_URL}/raw/main/hosts"
+SMARTDNS_UPDATE_URL = f"{PROJECT_URL}/raw/main/smartdns.conf"
+SURGE_UPDATE_URL = f"{PROJECT_URL}/raw/main/surge.conf"
 DOH_ENDPOINT = "https://public.dns.iij.jp/dns-query"
 EDNS_CLIENT_SUBNET = "101.110.0.0"
 EDNS_PREFIX = 18
@@ -250,8 +254,8 @@ def generate() -> tuple[str, list[SelectedHost]]:
     lines = [
         "# OopsGitHub Host Start",
         f"# Update time: {update_time}",
-        "# Project: https://github.com/hululu1068/OopsGitHub",
-        "# Update url: https://github.com/hululu1068/OopsGitHub/raw/main/hosts",
+        f"# Project: {PROJECT_URL}",
+        f"# Update url: {HOSTS_UPDATE_URL}",
         "",
     ]
     for selected in selected_hosts:
@@ -262,30 +266,41 @@ def generate() -> tuple[str, list[SelectedHost]]:
             lines.append(f"# IP Address Not Found         {selected.domain}")
     lines.append("")
     lines.append("# OopsGitHub Host End")
-    return "\n".join(lines) + "\n", selected_hosts
+    return "\n".join(lines) + "\n", selected_hosts, update_time
 
 
-def format_smartdns(selected_hosts: list[SelectedHost]) -> str:
-    lines = []
+def format_smartdns(selected_hosts: list[SelectedHost], update_time: str) -> str:
+    lines = [
+        "# OopsGitHub SmartDNS",
+        f"# Update time: {update_time}",
+        f"# Project: {PROJECT_URL}",
+        f"# Update url: {SMARTDNS_UPDATE_URL}",
+        "",
+    ]
     for selected in selected_hosts:
         for ip in selected.ips:
             lines.append(f"address /{selected.domain}/{ip}")
     return "\n".join(lines) + "\n"
 
 
-def format_surge(selected_hosts: list[SelectedHost]) -> str:
-    lines = []
+def format_surge(selected_hosts: list[SelectedHost], update_time: str) -> str:
+    lines = [
+        "# OopsGitHub Surge",
+        f"# Update time: {update_time}",
+        f"# Project: {PROJECT_URL}",
+        f"# Update url: {SURGE_UPDATE_URL}",
+        "",
+    ]
     for selected in selected_hosts:
         for ip in selected.ips:
             lines.append(f"{selected.domain} = {ip}")
     return "\n".join(lines) + "\n"
 
 
-def write_readme(hosts_content: str) -> None:
+def write_readme(hosts_content: str, update_time: str) -> None:
     template_path = ROOT / "scripts" / "README_TEMPLATE.md"
     if not template_path.exists():
         return
-    update_time = datetime.now(timezone.utc).astimezone().replace(microsecond=0).isoformat()
     readme = template_path.read_text(encoding="utf-8")
     readme = readme.replace("{hosts}", hosts_content.strip())
     readme = readme.replace("{update_time}", update_time)
@@ -321,11 +336,11 @@ def write_report(selected_hosts: list[SelectedHost]) -> None:
 
 
 def main() -> None:
-    hosts_content, selected_hosts = generate()
+    hosts_content, selected_hosts, update_time = generate()
     (ROOT / "hosts").write_text(hosts_content, encoding="utf-8")
-    (ROOT / "smartdns.conf").write_text(format_smartdns(selected_hosts), encoding="utf-8")
-    (ROOT / "surge.conf").write_text(format_surge(selected_hosts), encoding="utf-8")
-    write_readme(hosts_content)
+    (ROOT / "smartdns.conf").write_text(format_smartdns(selected_hosts, update_time), encoding="utf-8")
+    (ROOT / "surge.conf").write_text(format_surge(selected_hosts, update_time), encoding="utf-8")
+    write_readme(hosts_content, update_time)
     write_report(selected_hosts)
 
 
