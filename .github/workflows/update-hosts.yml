@@ -2,6 +2,9 @@ name: Update OopsGitHub hosts
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
   schedule:
     - cron: "0 */6 * * *"
 
