@@ -185,7 +185,7 @@ def curl_probe(domain: str, ip: str) -> CurlResult:
     except ValueError:
         return CurlResult(ip, False, 0, 0, 0, 0, 0, client_ip, completed.stderr.strip())
 
-    ok = completed.returncode == 0 and ssl_ok and 200 <= http_code < 500
+    ok = completed.returncode == 0 and ssl_ok and 200 <= http_code <= 500
     return CurlResult(
         ip=ip,
         ok=ok,
