@@ -13,108 +13,107 @@ OopsGitHub 让 GitHub 访问更流畅!
 
 ```bash
 # OopsGitHub Host Start
-# Update time: 2026-06-28T03:29:43+00:00
+# Update time: 2026-06-28T08:47:45+00:00
 # Project: https://github.com/hululu1068/OopsGitHub
 # Update url: https://github.com/hululu1068/OopsGitHub/raw/main/hosts
 
 20.27.177.113                 github.com
-140.82.112.17                 github.community
+140.82.114.17                 github.community
 192.0.66.2                    github.blog
 20.99.227.183                 github.dev
-185.199.108.153               github.io
 185.199.111.153               github.io
+185.199.108.153               github.io
 185.199.111.153               githubstatus.com
-185.199.110.153               githubstatus.com
+185.199.109.153               githubstatus.com
 # IP Address Not Found         githubassets.com
 # IP Address Not Found         githubusercontent.com
-140.82.114.30                 githubapp.com
-140.82.112.30                 githubapp.com
-185.199.111.153               githubnext.com
+140.82.113.29                 githubapp.com
+140.82.113.30                 githubapp.com
 185.199.109.153               githubnext.com
+185.199.108.153               githubnext.com
 # IP Address Not Found         githubpreview.dev
-140.82.112.18                 githubhackathon.com
-185.199.109.153               githubuniverse.com
+140.82.112.17                 githubhackathon.com
+185.199.108.153               githubuniverse.com
 185.199.111.153               githubuniverse.com
-140.82.112.21                 education.github.com
+140.82.114.22                 education.github.com
 185.199.111.153               myoctocat.com
 185.199.109.153               myoctocat.com
-185.199.111.153               opensource.guide
 185.199.109.153               opensource.guide
-140.82.113.18                 repo.new
+185.199.110.153               opensource.guide
+140.82.114.17                 repo.new
 23.227.38.65                  thegithubshop.com
 20.27.177.116                 api.github.com
-140.82.112.26                 alive.github.com
-140.82.112.26                 live.github.com
-140.82.112.21                 central.github.com
-140.82.112.21                 collector.github.com
+140.82.113.26                 alive.github.com
+140.82.113.26                 live.github.com
+140.82.114.22                 central.github.com
+140.82.114.22                 collector.github.com
 185.199.111.215               github.githubassets.com
-185.199.109.215               github.githubassets.com
+185.199.110.215               github.githubassets.com
 # IP Address Not Found         assets-cdn.github.com
 151.101.197.194               github.global.ssl.fastly.net
 # IP Address Not Found         github.map.fastly.net
-185.199.109.133               favicons.githubusercontent.com
+185.199.110.133               favicons.githubusercontent.com
 185.199.108.133               favicons.githubusercontent.com
-185.199.109.133               raw.githubusercontent.com
 185.199.108.133               raw.githubusercontent.com
-185.199.109.133               media.githubusercontent.com
+185.199.110.133               raw.githubusercontent.com
 185.199.111.133               media.githubusercontent.com
-185.199.110.133               objects.githubusercontent.com
+185.199.108.133               media.githubusercontent.com
 185.199.111.133               objects.githubusercontent.com
-185.199.109.133               cloud.githubusercontent.com
+185.199.110.133               objects.githubusercontent.com
 185.199.110.133               cloud.githubusercontent.com
-185.199.108.133               camo.githubusercontent.com
+185.199.108.133               cloud.githubusercontent.com
+185.199.111.133               camo.githubusercontent.com
 185.199.110.133               camo.githubusercontent.com
-185.199.108.133               user-images.githubusercontent.com
-185.199.111.133               user-images.githubusercontent.com
+185.199.109.133               user-images.githubusercontent.com
+185.199.110.133               user-images.githubusercontent.com
 185.199.109.133               private-user-images.githubusercontent.com
-185.199.110.133               private-user-images.githubusercontent.com
+185.199.108.133               private-user-images.githubusercontent.com
+185.199.108.133               avatars.githubusercontent.com
 185.199.111.133               avatars.githubusercontent.com
-185.199.110.133               avatars.githubusercontent.com
-185.199.109.133               avatars0.githubusercontent.com
 185.199.108.133               avatars0.githubusercontent.com
+185.199.110.133               avatars0.githubusercontent.com
 185.199.108.133               avatars1.githubusercontent.com
-185.199.110.133               avatars1.githubusercontent.com
-185.199.108.133               avatars2.githubusercontent.com
+185.199.109.133               avatars1.githubusercontent.com
+185.199.110.133               avatars2.githubusercontent.com
 185.199.111.133               avatars2.githubusercontent.com
-185.199.108.133               avatars3.githubusercontent.com
 185.199.111.133               avatars3.githubusercontent.com
+185.199.108.133               avatars3.githubusercontent.com
+185.199.110.133               avatars4.githubusercontent.com
 185.199.111.133               avatars4.githubusercontent.com
-185.199.109.133               avatars4.githubusercontent.com
+185.199.109.133               avatars5.githubusercontent.com
 185.199.110.133               avatars5.githubusercontent.com
-185.199.108.133               avatars5.githubusercontent.com
 20.27.177.114                 codeload.github.com
 20.27.177.113                 gist.github.com
+185.199.111.133               desktop.githubusercontent.com
 185.199.110.133               desktop.githubusercontent.com
-185.199.108.133               desktop.githubusercontent.com
+185.199.108.133               release-assets.githubusercontent.com
 185.199.109.133               release-assets.githubusercontent.com
-185.199.110.133               release-assets.githubusercontent.com
 13.107.42.16                  pipelines.actions.githubusercontent.com
 # IP Address Not Found         blob.core.windows.net
-54.231.163.25                 github-cloud.s3.amazonaws.com
-52.217.116.193                github-cloud.s3.amazonaws.com
-52.217.131.49                 github-com.s3.amazonaws.com
-54.231.163.25                 github-com.s3.amazonaws.com
-52.217.131.49                 github-production-release-asset-2e65be.s3.amazonaws.com
-16.15.183.154                 github-production-release-asset-2e65be.s3.amazonaws.com
-54.231.163.25                 github-production-repository-file-5c1aeb.s3.amazonaws.com
-16.15.183.154                 github-production-repository-file-5c1aeb.s3.amazonaws.com
-52.217.116.193                github-production-user-asset-6210df.s3.amazonaws.com
-16.15.245.188                 github-production-user-asset-6210df.s3.amazonaws.com
+52.217.202.129                github-cloud.s3.amazonaws.com
+52.216.29.28                  github-cloud.s3.amazonaws.com
+52.217.232.89                 github-com.s3.amazonaws.com
+52.217.171.129                github-com.s3.amazonaws.com
+52.217.171.129                github-production-release-asset-2e65be.s3.amazonaws.com
+52.217.232.89                 github-production-release-asset-2e65be.s3.amazonaws.com
+52.216.29.28                  github-production-repository-file-5c1aeb.s3.amazonaws.com
+52.217.232.89                 github-production-repository-file-5c1aeb.s3.amazonaws.com
+52.217.171.129                github-production-user-asset-6210df.s3.amazonaws.com
+52.217.232.89                 github-production-user-asset-6210df.s3.amazonaws.com
 # IP Address Not Found         githubcopilot.com
-140.82.112.21                 api.individual.githubcopilot.com
+140.82.114.22                 api.individual.githubcopilot.com
 20.27.177.117                 ghcr.io
 140.82.113.18                 atom.io
 140.82.114.17                 dependabot.com
-140.82.112.22                 git.io
-104.17.135.117                npmjs.com
+140.82.114.21                 git.io
 104.17.134.117                npmjs.com
-104.16.10.34                  npmjs.org
+104.17.135.117                npmjs.com
 104.16.11.34                  npmjs.org
+104.16.10.34                  npmjs.org
 # IP Address Not Found         npm.community
 47.79.66.67                   github-avatars.oss-cn-hongkong.aliyuncs.com
 151.101.198.79                github-atom-io-herokuapp-com.freetls.fastly.net
-13.107.253.69                 vscode.dev
-13.107.226.69                 vscode.dev
+150.171.109.150               vscode.dev
 172.67.217.78                 rawgit.com
 104.21.24.61                  rawgit.com
 # IP Address Not Found         rawgithub.com
@@ -122,7 +121,7 @@ OopsGitHub 让 GitHub 访问更流畅!
 # OopsGitHub Host End
 ```
 
-最后更新时间：`2026-06-28T03:29:43+00:00`
+最后更新时间：`2026-06-28T08:47:45+00:00`
 
 其他格式：
 
