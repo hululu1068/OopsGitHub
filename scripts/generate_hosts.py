@@ -21,7 +21,6 @@ ROOT = Path(__file__).resolve().parents[1]
 PROJECT_URL = "https://github.com/hululu1068/OopsGitHub"
 HOSTS_UPDATE_URL = f"{PROJECT_URL}/raw/main/hosts"
 SMARTDNS_UPDATE_URL = f"{PROJECT_URL}/raw/main/smartdns.conf"
-SURGE_UPDATE_URL = f"{PROJECT_URL}/raw/main/surge.conf"
 DOH_ENDPOINT = "https://public.dns.iij.jp/dns-query"
 EDNS_CLIENT_SUBNET = "101.110.0.0"
 EDNS_PREFIX = 18
@@ -311,15 +310,19 @@ def format_smartdns(selected_hosts: list[SelectedHost], update_time: str) -> str
 
 def format_surge(selected_hosts: list[SelectedHost], update_time: str) -> str:
     lines = [
-        "# OopsGitHub Surge",
-        f"# Update time: {update_time}",
-        f"# Project: {PROJECT_URL}",
-        f"# Update url: {SURGE_UPDATE_URL}",
+        "#!name = OopsGitHub",
+        "#!desc = 让您的 GitHub 访问更顺畅! 每6小时自动更新.",
+        "#!author = hululu1068",
+        "#!icon = https://raw.giteeusercontent.com/hululu1068/SurgeIcon/raw/main/png_128/Social%20Media/PogChamp.png",
+        f"#!homepage = {PROJECT_URL}",
+        f"#!update = {update_time}",
+        "",
+        "[Host]",
         "",
     ]
     for selected in selected_hosts:
-        for ip in selected.ips:
-            lines.append(f"{selected.domain} = {ip}")
+        if selected.ips:
+            lines.append(f"{selected.domain} = {','.join(selected.ips)}")
     return "\n".join(lines) + "\n"
 
 
@@ -365,7 +368,7 @@ def main() -> None:
     hosts_content, selected_hosts, update_time = generate()
     (ROOT / "hosts").write_text(hosts_content, encoding="utf-8")
     (ROOT / "smartdns.conf").write_text(format_smartdns(selected_hosts, update_time), encoding="utf-8")
-    (ROOT / "surge.conf").write_text(format_surge(selected_hosts, update_time), encoding="utf-8")
+    (ROOT / "surge.sgmodule").write_text(format_surge(selected_hosts, update_time), encoding="utf-8")
     write_readme(hosts_content, update_time)
     write_report(selected_hosts)
 
